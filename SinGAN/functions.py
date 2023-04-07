@@ -159,7 +159,7 @@ def read_image_dir(dir,opt):
     return x
 
 def np2torch(x,opt):
-    if opt.nc_im == 3:
+    if opt. == 3:
         x = x[:,:,:,None]
         x = x.transpose((3, 2, 0, 1))/255
     else:
@@ -341,8 +341,9 @@ def dilate_mask(mask,opt):
     if opt.mode == "editing":
         element = morphology.disk(radius=20)
     mask = torch2uint8(mask)
-    mask = mask[:,:,0]
-    mask = morphology.binary_dilation(mask,selem=element)
+    #mask = mask[:,:,0]
+    mask = mask[:,:,0:3]
+    mask = morphology.binary_dilation(mask,footprint=element)
     mask = filters.gaussian(mask, sigma=5)
     nc_im = opt.nc_im
     opt.nc_im = 1
