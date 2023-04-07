@@ -159,7 +159,7 @@ def read_image_dir(dir,opt):
     return x
 
 def np2torch(x,opt):
-    if opt. == 3:
+    if opt == 3:
         x = x[:,:,:,None]
         x = x.transpose((3, 2, 0, 1))/255
     else:
