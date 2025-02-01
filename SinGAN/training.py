@@ -4,6 +4,8 @@ import os
 import torch.nn as nn
 import torch.optim as optim
 import torch.utils.data
+import torch
+import numpy as np
 import math
 import matplotlib.pyplot as plt
 from SinGAN.imresize import imresize
@@ -301,6 +303,31 @@ def train_paint(opt,Gs,Zs,reals,NoiseAmp,centers,paint_inject_scale):
             nfc_prev = opt.nfc
         del D_curr,G_curr
     return
+
+
+def mask_random_patches(img, mask_ratio=0.3):
+    """
+    Randomly masks parts of the image during training.
+    
+    Args:
+        img: Input image tensor (C, H, W).
+        mask_ratio: Percentage of the image to mask (0.3 = 30%).
+    
+    Returns:
+        Masked image and mask tensor.
+    """
+    img_size = img.shape[-1]
+    mask_size = int(img_size * mask_ratio)
+    mask = torch.ones_like(img)
+
+    x_start = np.random.randint(0, img_size - mask_size)
+    y_start = np.random.randint(0, img_size - mask_size)
+
+    # Set part of the image to zero
+    mask[:, x_start:x_start + mask_size, y_start:y_start + mask_size] = 0
+    masked_img = img * mask
+
+    return masked_img, mask
 
 
 def init_models(opt):
