@@ -40,5 +40,10 @@ def get_arguments():
     parser.add_argument('--lambda_grad',type=float, help='gradient penelty weight',default=0.1)
     parser.add_argument('--alpha',type=float, help='reconstruction loss weight',default=10)
 
+    #outpainting:
+    parser.add_argument('--outpaint', action='store_true', help="Enable outpainting mode")
+    parser.add_argument('--n_size', type=int, default=128, help="Input image size")
+    parser.add_argument('--m_size', type=int, default=256, help="Outpainted output size")
+
     
     return parser
