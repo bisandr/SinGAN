@@ -55,6 +55,16 @@ This will also use the resulting trained model to generate random samples starti
 
 To run this code on a cpu machine, specify `--not_cuda` when calling `main_train.py`
 
+### Outpainting
+After training SinGAN on an image, run:
+
+```
+python generate.py --input_image input.jpg --model_dir TrainedModels/my_image --n_size 128 --m_size 256
+```
+This will expand the input image from 128×128 to 256×256 while generating realistic outpainted regions.
+
+
+
 ###  Random samples
 To generate random samples from any starting generation scale, please first train SinGAN model on the desired image (as described above), then run 
 
