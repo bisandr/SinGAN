@@ -55,6 +55,13 @@ This will also use the resulting trained model to generate random samples starti
 
 To run this code on a cpu machine, specify `--not_cuda` when calling `main_train.py`
 
+###  Train for outpainting
+To train SinGAN model for outpainting, put the desired training image under Input/Images, and run:
+
+```
+python main_train.py --input_image my_image.jpg --num_scales 7
+```
+
 ### Outpainting
 After training SinGAN on an image, run:
 
